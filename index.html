@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Happy Birthday Rin! 🎂</title>
+<link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#24103a; --bg2:#3b1a5c; --ink:#fff6e8; --muted:#d9c4f0;
+  --pink:#ff5fa2; --gold:#ffc83d; --mint:#5ef2c0; --sky:#6ab8ff;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#24103a}}
+:root[data-theme="dark"]{--bg:#24103a}
+*{box-sizing:border-box}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;min-height:100%;background:radial-gradient(120% 80% at 50% 0%,var(--bg2),var(--bg) 70%);color:var(--ink);
+  font-family:'DM Sans',system-ui,sans-serif;display:flex;flex-direction:column;align-items:center;overflow-x:hidden}
+canvas{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:5}
+main{width:100%;max-width:640px;padding:28px 22px 40px;text-align:center;position:relative;z-index:2}
+.bunting{position:absolute;top:0;left:0;width:100%;height:70px;z-index:1}
+h1{font-family:'Bagel Fat One','Arial Rounded MT Bold',system-ui,sans-serif;font-weight:400;line-height:1;margin:64px 0 8px;
+  font-size:clamp(2.6rem,12vw,4.6rem);letter-spacing:.01em;color:var(--gold);text-shadow:0 4px 0 var(--pink)}
+h1 .name{display:block;color:var(--ink);text-shadow:0 4px 0 var(--sky);font-size:.8em;margin-top:6px;word-break:break-word}
+.sub{color:var(--muted);margin:14px auto 0;max-width:30ch;font-size:1.05rem}
+.stage{margin:22px auto 6px;width:min(320px,80vw)}
+svg.cake{width:100%;height:auto;overflow:visible}
+.flame{transform-origin:50% 100%;transform-box:fill-box;animation:flick .5s ease-in-out infinite alternate}
+.flame:nth-child(2n){animation-duration:.42s}
+@keyframes flick{from{transform:scale(1,1) rotate(-3deg)}to{transform:scale(.88,1.12) rotate(3deg)}}
+.out .flame{display:none}
+.smoke{opacity:0}
+.out .smoke{animation:rise 1.6s ease-out forwards}
+@keyframes rise{0%{opacity:.8;transform:translateY(0)}100%{opacity:0;transform:translateY(-34px)}}
+.btn{font:inherit;font-weight:500;font-size:1.1rem;border:0;border-radius:999px;padding:14px 28px;cursor:pointer;
+  background:var(--gold);color:#3a1650;box-shadow:0 5px 0 #c9921a;transition:transform .12s,box-shadow .12s}
+.btn:active{transform:translateY(4px);box-shadow:0 1px 0 #c9921a}
+.btn:focus-visible,input:focus-visible{outline:3px solid var(--mint);outline-offset:3px}
+.card{margin:28px auto 0;max-width:30rem;background:rgba(255,246,232,.08);border:2px dashed var(--pink);border-radius:22px;
+  padding:26px 24px;text-align:left;font-size:1.08rem;line-height:1.65;display:none}
+.out .card{display:block;animation:pop .6s cubic-bezier(.2,1.4,.4,1) both}
+@keyframes pop{from{opacity:0;transform:scale(.9) translateY(14px)}to{opacity:1;transform:none}}
+.card p{margin:0 0 12px}
+.card .sign{margin:16px 0 0;color:var(--gold);font-weight:500}
+.out .hide-after{display:none}
+.edit{margin-top:34px;font-size:.9rem;color:var(--muted)}
+.edit input{font:inherit;background:transparent;border:0;border-bottom:2px solid var(--muted);color:var(--ink);width:9rem;text-align:center;padding:4px}
+
+.sky{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.star{position:absolute;width:4px;height:4px;border-radius:50%;background:#fff6e8;animation:tw 2.4s ease-in-out infinite}
+@keyframes tw{0%,100%{opacity:.15;transform:scale(.6)}50%{opacity:1;transform:scale(1.3)}}
+.balloon{position:absolute;bottom:-140px;width:54px;height:68px;border-radius:50% 50% 48% 48%;opacity:.9;
+  animation:float linear infinite}
+.balloon:after{content:"";position:absolute;left:50%;top:100%;width:2px;height:60px;background:rgba(255,246,232,.5);transform:translateX(-50%)}
+.balloon:before{content:"";position:absolute;left:14px;top:12px;width:10px;height:16px;border-radius:50%;background:rgba(255,255,255,.45);transform:rotate(25deg)}
+@keyframes float{0%{transform:translate(0,0) rotate(-4deg)}25%{transform:translate(18px,-30vh) rotate(4deg)}
+  50%{transform:translate(-14px,-65vh) rotate(-4deg)}75%{transform:translate(16px,-95vh) rotate(4deg)}100%{transform:translate(0,-125vh) rotate(-3deg)}}
+.ch{display:inline-block;animation:hop 1.8s ease-in-out infinite;animation-delay:calc(var(--i)*.09s)}
+@keyframes hop{0%,55%,100%{transform:translateY(0) rotate(0)}25%{transform:translateY(-14px) rotate(-4deg)}40%{transform:translateY(0) scale(1.05,.92)}}
+h1{animation:drop .9s cubic-bezier(.2,1.5,.4,1) both}
+@keyframes drop{from{opacity:0;transform:translateY(-60px) scale(.8)}to{opacity:1;transform:none}}
+.stage{animation:bob 3.4s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.bunting{transform-origin:50% 0;animation:sway 4s ease-in-out infinite alternate}
+@keyframes sway{from{transform:rotate(-.6deg)}to{transform:rotate(.6deg)}}
+#blow{animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(1);box-shadow:0 5px 0 #c9921a,0 0 0 0 rgba(255,200,61,.6)}50%{transform:scale(1.05);box-shadow:0 5px 0 #c9921a,0 0 0 14px rgba(255,200,61,0)}}
+.flame{filter:drop-shadow(0 0 6px #ffc83d)}
+.sub{animation:fadeup 1s .5s both}
+@keyframes fadeup{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.spark{position:absolute;pointer-events:none;font-size:20px;animation:spk 1s ease-out forwards;z-index:6}
+@keyframes spk{from{opacity:1;transform:translate(0,0) scale(.5)}to{opacity:0;transform:translate(var(--dx),var(--dy)) scale(1.4) rotate(120deg)}}
+
+.music{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:10;
+  width:52px;height:52px;border-radius:50%;border:0;cursor:pointer;font-size:1.5rem;line-height:1;background:var(--pink);
+  box-shadow:0 4px 0 #b83575;color:#fff}
+.music:active{transform:translateY(3px);box-shadow:0 1px 0 #b83575}
+.music:focus-visible{outline:3px solid var(--mint);outline-offset:3px}
+.music.on{animation:beat .5s ease-in-out infinite alternate}
+@keyframes beat{from{transform:scale(1)}to{transform:scale(1.12)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+<div class="sky" id="sky" aria-hidden="true"></div>
+<canvas id="c" aria-hidden="true"></canvas>
+<svg class="bunting" viewBox="0 0 400 70" preserveAspectRatio="none" aria-hidden="true">
+  <path d="M0 8 Q100 50 200 8 T400 8" fill="none" stroke="#fff6e8" stroke-width="2" opacity=".5"/>
+  <g>
+    <path d="M20 22 l22 0 -11 26z" fill="#ff5fa2"/><path d="M62 33 l22 0 -11 26z" fill="#ffc83d"/>
+    <path d="M104 40 l22 0 -11 26z" fill="#5ef2c0"/><path d="M146 38 l22 0 -11 26z" fill="#6ab8ff"/>
+    <path d="M188 28 l22 0 -11 26z" fill="#ff5fa2"/><path d="M230 38 l22 0 -11 26z" fill="#ffc83d"/>
+    <path d="M272 40 l22 0 -11 26z" fill="#5ef2c0"/><path d="M314 33 l22 0 -11 26z" fill="#6ab8ff"/>
+    <path d="M356 22 l22 0 -11 26z" fill="#ff5fa2"/>
+  </g>
+</svg>
+
+<main id="app">
+  <h1><span id="greet">Happy Birthday,</span><span class="name" id="name">Lucu Rin</span></h1>
+  <p class="sub hide-after">Make a wish, then blow out the candles.</p>
+
+  <div class="stage">
+    <svg class="cake" viewBox="0 0 300 260" role="img" aria-label="Birthday cake with five lit candles">
+      <ellipse cx="150" cy="248" rx="140" ry="9" fill="#000" opacity=".25"/>
+      <rect x="30" y="160" width="240" height="84" rx="14" fill="#ff5fa2"/>
+      <rect x="30" y="160" width="240" height="22" rx="11" fill="#fff6e8"/>
+      <path d="M30 176 q15 22 30 0 q15 22 30 0 q15 22 30 0 q15 22 30 0 q15 22 30 0 q15 22 30 0 q15 22 30 0 q15 22 30 0 v-8 h-240z" fill="#fff6e8"/>
+      <circle cx="70" cy="215" r="6" fill="#ffc83d"/><circle cx="125" cy="224" r="6" fill="#5ef2c0"/>
+      <circle cx="180" cy="214" r="6" fill="#6ab8ff"/><circle cx="232" cy="222" r="6" fill="#ffc83d"/>
+      <rect x="62" y="116" width="164" height="50" rx="12" fill="#8b5cf6" transform="translate(0 0)"/>
+      <rect x="62" y="116" width="164" height="16" rx="8" fill="#fff6e8"/>
+      <g id="candles">
+        <g><rect x="85" y="78" width="9" height="40" rx="3" fill="#6ab8ff"/><path class="flame" d="M89.500 46 q10 14 0 28 q-10 -14 0 -28z" fill="#ffc83d"/><path class="smoke" d="M89 60 q-6 -10 0 -18 q6 -8 0 -16" stroke="#fff6e8" fill="none" stroke-width="3" stroke-linecap="round"/></g>
+        <g><rect x="118" y="70" width="9" height="48" rx="3" fill="#ffc83d"/><path class="flame" d="M122.500 38 q10 14 0 28 q-10 -14 0 -28z" fill="#ff8a3d"/><path class="smoke" d="M122 52 q-6 -10 0 -18 q6 -8 0 -16" stroke="#fff6e8" fill="none" stroke-width="3" stroke-linecap="round"/></g>
+        <g><rect x="146" y="64" width="9" height="54" rx="3" fill="#5ef2c0"/><path class="flame" d="M150.500 32 q10 14 0 28 q-10 -14 0 -28z" fill="#ffc83d"/><path class="smoke" d="M150 46 q-6 -10 0 -18 q6 -8 0 -16" stroke="#fff6e8" fill="none" stroke-width="3" stroke-linecap="round"/></g>
+        <g><rect x="174" y="70" width="9" height="48" rx="3" fill="#ff5fa2"/><path class="flame" d="M178.500 38 q10 14 0 28 q-10 -14 0 -28z" fill="#ff8a3d"/><path class="smoke" d="M178 52 q-6 -10 0 -18 q6 -8 0 -16" stroke="#fff6e8" fill="none" stroke-width="3" stroke-linecap="round"/></g>
+        <g><rect x="206" y="78" width="9" height="40" rx="3" fill="#ffc83d"/><path class="flame" d="M210.500 46 q10 14 0 28 q-10 -14 0 -28z" fill="#ffc83d"/><path class="smoke" d="M210 60 q-6 -10 0 -18 q6 -8 0 -16" stroke="#fff6e8" fill="none" stroke-width="3" stroke-linecap="round"/></g>
+      </g>
+    </svg>
+  </div>
+
+  <button class="btn hide-after" id="blow">Blow out the candles</button>
+
+  <section class="card" aria-live="polite">
+    
+    <p>Selamat ulang tahun, sayanggg! ❤️🎂, Waa you're 24 pffff - someone getting old aweeeeeee bahahahaha</p>
+    <p>I hope all your dreams come true. Make lot's of money & become more self independent women</p>
+    <p>No matter how much we grow up or how much life changes, I hope we always get to share our silly conversations - our random laughs - our little secrets. Thank you for being you - You deserve to feel loved not just today but every single day of your life 💗🧸</p>
+    <p>Enjoy your birthday with family and friends</p>
+
+    <p class="sign">Happy birthday, Rin! From your just friend (Blehhh) & Snow 🎉</p>
+    <button class="btn" id="again" style="margin-top:14px;font-size:.95rem;padding:10px 20px">More confetti</button>
+  </section>
+</main>
+<button class="music" id="music" aria-label="Play birthday song" aria-pressed="false">🔇</button>
+
+<script>
+(function(){
+  var app=document.getElementById('app'), nameEl=document.getElementById('name');
+  try{var q=new URLSearchParams(location.search).get('name'); if(q){nameEl.textContent=q.slice(0,24);}}catch(e){}
+
+
+  var sky=document.getElementById('sky'), bc=['#ff5fa2','#ffc83d','#5ef2c0','#6ab8ff'];
+  for(var i=0;i<40;i++){var st=document.createElement('i');st.className='star';
+    st.style.left=Math.random()*100+'%';st.style.top=Math.random()*100+'%';
+    st.style.animationDelay=(Math.random()*2.4)+'s';sky.appendChild(st);}
+  function balloon(delay){var b=document.createElement('div');b.className='balloon';
+    b.style.left=(Math.random()*92)+'%';b.style.background=bc[Math.floor(Math.random()*4)];
+    var sc=.7+Math.random()*.7;b.style.width=54*sc+'px';b.style.height=68*sc+'px';
+    b.style.animationDuration=(9+Math.random()*7)+'s';b.style.animationDelay=(delay||0)+'s';sky.appendChild(b);}
+  for(var j=0;j<9;j++)balloon(-Math.random()*12);
+  function wave(){var t=nameEl.textContent;nameEl.innerHTML='';
+    t.split('').forEach(function(c,i){var sp=document.createElement('span');sp.className='ch';
+      sp.style.setProperty('--i',i);sp.textContent=c===' '?'\u00a0':c;nameEl.appendChild(sp);});}
+  wave();
+  function sparkle(x,y){for(var k=0;k<14;k++){var e=document.createElement('span');e.className='spark';
+    e.textContent=['✨','⭐','🎉','💖'][k%4];e.style.left=x+'px';e.style.top=y+'px';
+    e.style.setProperty('--dx',(Math.random()*240-120)+'px');e.style.setProperty('--dy',(Math.random()*-200-20)+'px');
+    document.body.appendChild(e);setTimeout(function(el){el.remove();}.bind(null,e),1000);}}
+  document.addEventListener('pointerdown',function(e){if(e.target.closest&&e.target.closest('#music'))return;sparkle(e.clientX+scrollX,e.clientY+scrollY);});
+
+
+  var ac=null, master=null, timer=0, playing=false, mbtn=document.getElementById('music');
+  var N={C4:261.63,D4:293.66,E4:329.63,F4:349.23,G4:392,A4:440,B4:493.88,C5:523.25,D5:587.33,E5:659.25,F5:698.46,G5:783.99};
+  var tune=[['G4',.75],['G4',.25],['A4',1],['G4',1],['C5',1],['B4',2],
+            ['G4',.75],['G4',.25],['A4',1],['G4',1],['D5',1],['C5',2],
+            ['G4',.75],['G4',.25],['G5',1],['E5',1],['C5',1],['B4',1],['A4',1],
+            ['F5',.75],['F5',.25],['E5',1],['C5',1],['D5',1],['C5',2]];
+  var beat=.5;
+  function note(f,t,d,out){
+    [['triangle',f,.28],['sine',f*2,.08]].forEach(function(o){
+      var osc=ac.createOscillator(),g=ac.createGain();
+      osc.type=o[0];osc.frequency.value=o[1];
+      g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(o[2],t+.02);
+      g.gain.exponentialRampToValueAtTime(.001,t+d);
+      osc.connect(g);g.connect(out);osc.start(t);osc.stop(t+d+.05);});
+  }
+  function playTune(){
+    if(!playing)return;
+    var t=ac.currentTime+.05,total=0;
+    tune.forEach(function(n){var d=n[1]*beat;note(N[n[0]],t+total,Math.max(d*1.5,.3),master);total+=d;});
+    timer=setTimeout(playTune,(total+1.5)*1000);
+  }
+  function startMusic(){
+    if(playing)return;
+    try{
+      ac=ac||new (window.AudioContext||window.webkitAudioContext)();
+      if(ac.state==='suspended')ac.resume();
+      master=ac.createGain();master.gain.value=.5;master.connect(ac.destination);
+      playing=true;playTune();
+      mbtn.textContent='🔊';mbtn.classList.add('on');mbtn.setAttribute('aria-pressed','true');mbtn.setAttribute('aria-label','Mute birthday song');
+    }catch(e){}
+  }
+  function stopMusic(){
+    playing=false;clearTimeout(timer);
+    if(master){master.gain.setTargetAtTime(0,ac.currentTime,.05);}
+    mbtn.textContent='🔇';mbtn.classList.remove('on');mbtn.setAttribute('aria-pressed','false');mbtn.setAttribute('aria-label','Play birthday song');
+  }
+  mbtn.addEventListener('click',function(e){e.stopPropagation();playing?stopMusic():startMusic();});
+
+  var cv=document.getElementById('c'), cx=cv.getContext('2d'), parts=[], raf=0;
+  var cols=['#ff5fa2','#ffc83d','#5ef2c0','#6ab8ff','#fff6e8'];
+  function size(){cv.width=innerWidth*devicePixelRatio;cv.height=innerHeight*devicePixelRatio;}
+  size(); addEventListener('resize',size);
+  function burst(){
+    var d=devicePixelRatio;
+    for(var i=0;i<140;i++){
+      var side=i%2?1:-1;
+      parts.push({x:(side>0?cv.width:0),y:cv.height*.75,vx:-side*(4+Math.random()*9)*d,vy:-(10+Math.random()*12)*d,
+        w:(6+Math.random()*6)*d,h:(4+Math.random()*5)*d,r:Math.random()*6,vr:(Math.random()-.5)*.4,c:cols[i%cols.length]});
+    }
+    if(!raf) loop();
+  }
+  function loop(){
+    cx.clearRect(0,0,cv.width,cv.height);
+    parts=parts.filter(function(p){return p.y<cv.height+40;});
+    parts.forEach(function(p){
+      p.vy+=.35*devicePixelRatio; p.vx*=.992; p.x+=p.vx; p.y+=p.vy; p.r+=p.vr;
+      cx.save();cx.translate(p.x,p.y);cx.rotate(p.r);cx.fillStyle=p.c;cx.fillRect(-p.w/2,-p.h/2,p.w,p.h);cx.restore();
+    });
+    raf = parts.length ? requestAnimationFrame(loop) : 0;
+  }
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.getElementById('blow').addEventListener('click',function(){
+    app.classList.add('out');startMusic();
+    document.getElementById('greet').textContent='Happy Birthday,';
+    if(!reduce){burst();setTimeout(burst,500);setTimeout(burst,1100);for(var m=0;m<6;m++)balloon(0);}
+    document.querySelector('.card').scrollIntoView({behavior:reduce?'auto':'smooth',block:'center'});
+  });
+  document.getElementById('again').addEventListener('click',function(){ if(!reduce) burst(); });
+})();
+</script>
+</body>
+</html>
